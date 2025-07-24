@@ -10,4 +10,4 @@ Projet qui extrait des données à partir de l'API Google Books, les traite et l
 
 ## 🚀 Utilisation
 ```bash
-python main.py --pages <param> --database <param>
+python main.py --pages <param> --database <param.db>
