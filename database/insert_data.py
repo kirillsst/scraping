@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+import os
 
 def insert_and_count_books(df_books: pd.DataFrame, db_name: str = "book_store.db") -> int:
     """
@@ -12,7 +13,12 @@ def insert_and_count_books(df_books: pd.DataFrame, db_name: str = "book_store.db
     Returns:
         int: Le nombre total de livres insérés.
     """
-    with sqlite3.connect(db_name) as connection:
+    db_dir = "database" 
+    os.makedirs(db_dir, exist_ok=True)#crée un dossier s'il n'existe pas
+
+    db_path = f"{db_dir}/{db_name}"
+
+    with sqlite3.connect(db_path) as connection:
         df_books.to_sql('books', connection, if_exists='replace', index=False)
         cursor = connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM books")

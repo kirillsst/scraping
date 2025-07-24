@@ -8,8 +8,11 @@ def run_scraping_pipeline(pages:int, database:str):
     books = scrape_books(5)
     df = pd.DataFrame(books)
 
-    print("Traitment")
+    print("Traitment...")
     df_clean = convert_types(df)
+
+    print(" Insertion dans la base de données...")
+    insert_and_count_books(df_clean, database)
 
     print("Sauvgarde")
     df_clean.to_csv("~/scraping_repo/scraping/data/data_scraping.csv", index=False)
